@@ -4,10 +4,10 @@ require_relative 'lib/project'
 def main(path)
   begin
     project = Project.new(path)
-    Util.succeed(true)
+    return Util.succeed(project.to_json)
   rescue StandardError => e
     return Util.error(e.message)
   end
 end
 
-p main(ARGV.first)
+print main(ARGV.first)

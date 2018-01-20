@@ -9,11 +9,12 @@ const run = function(script, params, callback) {
   const cmd = 'ruby ' + obj + ' ' + params.join(' ')
   childProcess.exec(cmd, (err, output, errout) => {
     if(err) {
-      callback({ok: false, message: "" + err, payload: null})
+      callback({'ok': false, 'message': '' + err, 'payload': null})
     } else {
-      callback(JSON.parse(output))
+      const param = JSON.parse(output)
+      callback(param)
     }
   })
 }
 
-export {run}
+export default {run}

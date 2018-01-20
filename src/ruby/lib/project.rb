@@ -1,3 +1,4 @@
+require 'json'
 require_relative 'rpgmaker'
 require_relative 'source_tree'
 
@@ -10,6 +11,14 @@ class Project
     @path = path
     check_path
     setup_data
+  end
+
+  def to_json
+    {
+      "path": @path,
+      "name": @info[:name],
+      "version": @info[:version].to_s
+    }
   end
 
   def game_rvproj2
