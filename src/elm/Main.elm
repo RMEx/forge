@@ -1,8 +1,44 @@
 module Main exposing (..)
 
-import Html exposing (text)
+import Port exposing (Flags)
+import Message exposing (Message(..))
+import Model exposing (Model)
+import View exposing (global)
+import Html
+import Action
 
 
-main : Html.Html msg
+subscriptions : Model -> Sub Message
+subscriptions model =
+    Sub.batch
+        [ Port.sendProject SendProject
+        , Port.selectedProject SelectedProject
+        ]
+
+
+update : Message -> Model -> ( Model, Cmd Message )
+update message model =
+    case message of
+        SendProject effect ->
+            Action.retreiveProject model effect
+
+        SelectProject ->
+            Action.selectProject model
+
+        SelectedProject path ->
+            Action.selectedProject model path
+
+
+init : Flags -> ( Model, Cmd Message )
+init flags =
+    Model.fetchProject flags.path
+
+
+main : Platform.Program Flags Model Message
 main =
-    text "Hello Forge"
+    Html.programWithFlags
+        { init = init
+        , update = update
+        , view = global
+        , subscriptions = subscriptions
+        }

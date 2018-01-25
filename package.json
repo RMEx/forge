@@ -7,22 +7,27 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "./node_modules/.bin/webpack",
     "start": "./node_modules/.bin/electron forge.js",
+    "exec": "./node_modules/.bin/electron forge.js",
     "prebuild": "npm install && node ./node_modules/electron/install.js",
-    "prestart": "npm run build"
+    "watch": "webpack --config webpack.config.js --watch",
+    "prewatch": "npm run build",
+    "prestart": "npm run build",
+    "preexec": "./node_modules/.bin/webpack"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/RMEx/forge.git"
   },
   "dependencies": {
-    "electron-packager": "^9.1.0"
+    "electron-packager": "^9.1.0",
+    "elm": "^0.18.0"
   },
   "devDependencies": {
     "webpack": "^3.8.1",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
-    "electron": "^1.7.9",
+    "electron": "~>1.7.11",
     "elm-webpack-loader": "^4.4.0",
     "electron-rebuild": "^1.6.0"
   },

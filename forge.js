@@ -3,12 +3,12 @@ const electron = require('electron')
 const app = electron.app
 const BrowserWindow = electron.BrowserWindow
 
-let mainWindow
 
+let mainWindow
 function createWindow() {
   mainWindow = new BrowserWindow({
-    width: 640,
-    height: 416,
+    width: 930,
+    height: 540,
     frame: true,
     resizable: true
   })
