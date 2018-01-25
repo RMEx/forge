@@ -21,6 +21,10 @@ class Source_Tree
     @seed
   end
 
+  def titles
+    @raw_tree.map { |line| line[1] }
+  end
+
   def [](key)
     value =
       if key.is_a?(String)

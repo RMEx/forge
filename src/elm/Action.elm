@@ -3,6 +3,7 @@ module Action
         ( retreiveProject
         , selectProject
         , selectedProject
+        , openInExplorer
         )
 
 import Model exposing (Model)
@@ -14,7 +15,10 @@ import RemoteData
 
 pushError : Model -> String -> Model
 pushError model message =
-    { model | errors = (message :: model.errors) }
+    { model
+        | errors = (message :: model.errors)
+        , project = RemoteData.Failure message
+    }
 
 
 pushProject : Model -> Struct.Project -> Model
@@ -30,6 +34,16 @@ notAskedProject model =
 pendingProject : Model -> Model
 pendingProject model =
     { model | project = RemoteData.Pending }
+
+
+openInExplorer : Model -> ( Model, Cmd Message )
+openInExplorer model =
+    case model.project of
+        RemoteData.Success project ->
+            ( model, Port.openInExplorer project.path )
+
+        _ ->
+            ( model, Cmd.none )
 
 
 retreiveProject : Model -> Effect Struct.Project -> ( Model, Cmd Message )

@@ -17,7 +17,9 @@ class Project
     {
       "path": @path,
       "name": @info[:name],
-      "version": @info[:version].to_s
+      "version": @info[:version].to_s,
+      "titlescreens": build_titles,
+      "scripts": build_scripts
     }
   end
 
@@ -39,6 +41,23 @@ class Project
   end
 
   private
+
+  def build_scripts
+     tree.titles
+  end
+
+  def build_title(key)
+    obj = @game_system.send("title#{key}_name")
+    real_path = @path + "/Graphics/Titles#{key}/#{obj}.png"
+    if obj && !obj.empty?
+      f = File.exist?(real_path)
+      {path: f ? real_path : "Titles#{key}/#{obj}.png", isRTP: !f}
+    end
+  end
+
+  def build_titles
+    [1, 2].map {|x| build_title(x)}.compact
+  end
 
   def setup_tree
     Source_Tree.from_file(data_scripts)

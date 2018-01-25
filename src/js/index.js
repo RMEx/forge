@@ -5,7 +5,7 @@ import forage from './forage'
 import path from 'path'
 import fs from 'fs'
 import elm from '../elm/Main.elm'
-const {remote} = electron
+const {remote, shell} = electron
 
 const fetchPath = function() {
   const potentialPath = forage.fetch('project-path')
@@ -52,3 +52,9 @@ elmApp.ports.selectProject.subscribe(
     })
   }
 )
+
+
+elmApp.ports.openInExplorer.subscribe((pwd) => {
+  const dir = path.resolve(pwd)
+  shell.showItemInFolder(dir)
+});

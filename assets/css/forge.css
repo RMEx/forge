@@ -33,6 +33,7 @@ body {
   font-family: 'Roboto', sans-serif;
   margin: 0;
   height: 100vh;
+  min-width: 800px;
 }
 
 .inner-app {
@@ -44,6 +45,35 @@ body {
 .inner-app > main {
   flex: 1;
 }
+
+ul.two-cell {
+  padding: 0;
+}
+
+ul.two-cell > li {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+}
+
+.standard-enumeration > li {
+  padding: 4px;
+  font-size: 0.75em;
+}
+.standard-enumeration > li:nth-child(even) {
+  background-color: white;
+  padding: 4px;
+}
+ul.two-cell > li > div:first-child {
+  font-weight: 900;
+  flex: 2;
+}
+ul.two-cell > li > div:last-child {
+  margin-left: 8px;
+  flex: 8;
+}
+
+
 
 .top-bar, footer {
   padding: 8px;
@@ -72,6 +102,7 @@ footer > span {
 .top-bar .logo {
   font-weight: 900;
   display: inline-block;
+  font-size: 1.5em;
 }
 .top-bar .logo::first-letter {
   font-style: italic;
@@ -87,14 +118,9 @@ footer > span {
   font-size: 80%;
 }
 
-.active-project-bar .project-name {
-  color: white;
-}
-
 .active-project-bar .project-path {
   padding-left: 12px;
 }
-
 
 .active-project-bar:empty {
   display: none;
@@ -112,4 +138,130 @@ footer > span {
 
 .std-button:hover {
   background-color: #35b0ab;
+}
+
+.full-button {
+  width: 100%;
+  cursor: pointer;
+  transition: all 0.3s;
+  border-radius: 4px;
+  padding: 8px 12px;
+  width: 100%;
+  background-color: #FFF;
+  border: 0 solid black;
+}
+
+.text-transparent {
+  color: transparent;
+}
+
+main {
+  display: flex;
+  flex-direction: row;
+}
+
+main > div {
+  padding: 6px;
+}
+
+main > .packages-list {
+  flex: 1;
+}
+
+main > .project-details {
+  flex: 1;
+  background-color: #F6F8FA;
+  border-left: 1px solid #E1E4E8;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  overflow: auto;
+}
+
+main > .project-details > .no-project {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+main > .project-details > div {
+  padding: 4px;
+}
+
+main > .project-details > div:first-child {
+  flex: 5;
+  padding-right: 8px;
+  font-size: 0.8em;
+}
+
+main > .project-details > div:last-child {
+  flex: 7;
+  margin-left: 6px;
+}
+
+main > .project-details h2 {
+  margin: 0;
+  font-size: 1em;
+}
+
+main > .project-details > .no-project > div {
+  text-align: center;
+  margin: auto;
+  color: #E1E4E8;
+}
+
+
+main > .project-details > .no-project > div i {
+  display: block;
+}
+
+.game-thumbnail {
+  position: relative;
+  width: 100%;
+}
+
+.game-thumbnail > img {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.game-thumbnail > img:first-child {
+  position: static;
+}
+
+.game-thumbnail > div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position-x: center;
+
+}
+
+.scripts-list {
+  overflow: auto;
+}
+
+.scripts-list ul {
+  padding: 0;
+
+}
+
+.scripts-list ul > li {
+  list-style: none;
+  padding: 4px 0;
+  background-color: white;
+}
+
+.scripts-list ul > li:nth-child(even) {
+  background-color: transparent;
 }
