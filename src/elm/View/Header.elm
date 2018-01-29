@@ -14,7 +14,17 @@ import Html
         , button
         , span
         , div
+        , h1
         )
+
+
+render : ActiveProject -> Html Message
+render project =
+    header
+        []
+        [ topBar project
+        , projectBar project
+        ]
 
 
 selector : ActiveProject -> List (Html Message)
@@ -42,7 +52,7 @@ topBar : ActiveProject -> Html Message
 topBar project =
     div
         [ Attr.class "top-bar" ]
-        [ span [ Attr.class "logo" ] [ text "forge" ]
+        [ h1 [ Attr.class "logo" ] [ text "forge" ]
         , div
             []
             (selector project)
@@ -53,12 +63,10 @@ projectBarContent : ActiveProject -> List (Html Message)
 projectBarContent activeProject =
     case activeProject of
         Success project ->
-            [ span [ Attr.class "project-name" ] [ text project.name ]
-            , span [ Attr.class "project-path" ] [ text project.path ]
-            ]
+            [ span [ Attr.class "project-path" ] [ text project.path ] ]
 
         _ ->
-            []
+            [ span [ Attr.class "no-project" ] [ text "no current project" ] ]
 
 
 projectBar : ActiveProject -> Html Message
@@ -66,12 +74,3 @@ projectBar project =
     div
         [ Attr.class "active-project-bar" ]
         (projectBarContent project)
-
-
-render : ActiveProject -> Html Message
-render project =
-    header
-        []
-        [ topBar project
-        , projectBar project
-        ]

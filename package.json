@@ -6,10 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "./node_modules/.bin/webpack",
-    "start": "./node_modules/.bin/electron forge.js",
+    "start": "npm run exec",
     "exec": "./node_modules/.bin/electron forge.js",
-    "prebuild": "npm install && node ./node_modules/electron/install.js",
-    "watch": "webpack --config webpack.config.js --watch",
+    "prebuild": "node ./node_modules/electron/install.js",
     "prewatch": "npm run build",
     "prestart": "npm run build",
     "preexec": "./node_modules/.bin/webpack"

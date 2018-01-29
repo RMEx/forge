@@ -28,6 +28,9 @@ update message model =
         SelectedProject path ->
             Action.selectedProject model path
 
+        OpenInExplorer ->
+            Action.openInExplorer model
+
 
 init : Flags -> ( Model, Cmd Message )
 init flags =

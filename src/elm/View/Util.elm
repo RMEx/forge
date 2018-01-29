@@ -1,4 +1,4 @@
-module View.Util exposing (fa, icon, iconCustom)
+module View.Util exposing (fa, icon, iconCustom, twoCell, parallaxes)
 
 {-| Provide some useful function to write the components
 -}
@@ -8,6 +8,10 @@ import Html
         ( Html
         , Attribute
         , i
+        , ul
+        , li
+        , div
+        , img
         )
 import Html.Attributes as Attr
 
@@ -39,3 +43,37 @@ icon identifier =
 iconCustom : String -> List String -> List (Attribute msg) -> Html msg
 iconCustom identifier classes attributes =
     i ((fa identifier classes) ++ attributes) []
+
+
+{-| Generate a two cell list
+-}
+twoCell : List ( Html msg, Html msg ) -> List String -> Html msg
+twoCell list classes =
+    ul
+        [ Attr.class (String.join " " ("two-cell" :: classes)) ]
+        (List.map
+            (\( x, y ) ->
+                li [] [ div [] [ x ], div [] [ y ] ]
+            )
+            list
+        )
+
+
+{-| Generate a multiparallaxes div
+-}
+parallaxes : List { path : String, isRTP : Bool } -> List (Html msg)
+parallaxes =
+    List.map parallaxesAux
+
+
+parallaxesAux : { path : String, isRTP : Bool } -> Html msg
+parallaxesAux background =
+    img [ Attr.src (resolveBackground background) ] []
+
+
+resolveBackground : { path : String, isRTP : Bool } -> String
+resolveBackground record =
+    if record.isRTP then
+        "assets/rtp/" ++ record.path
+    else
+        record.path

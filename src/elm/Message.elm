@@ -8,3 +8,4 @@ type Message
     = SendProject (Effect Struct.Project)
     | SelectProject
     | SelectedProject (Maybe String)
+    | OpenInExplorer

@@ -5,6 +5,7 @@ import Message exposing (Message(..))
 import Html.Attributes as Attr
 import View.Header
 import View.Footer
+import View.ProjectSummary
 import Html
     exposing
         ( Html
@@ -22,6 +23,8 @@ global model =
         [ View.Header.render model.project
         , main_
             []
-            [ text "main" ]
+            [ div [ Attr.class "packages-list" ] [ text "a" ]
+            , View.ProjectSummary.render model.project
+            ]
         , View.Footer.render model.errors
         ]

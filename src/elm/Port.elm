@@ -6,6 +6,7 @@ port module Port
         , sendProject
         , selectProject
         , selectedProject
+        , openInExplorer
         )
 
 import Struct
@@ -23,6 +24,9 @@ type alias Effect a =
 
 
 port fetchProject : String -> Cmd msg
+
+
+port openInExplorer : String -> Cmd msg
 
 
 port sendProject : (Effect Struct.Project -> msg) -> Sub msg
